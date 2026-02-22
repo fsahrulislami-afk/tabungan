@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PocketMoney AI - Future OS</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="scanline"></div>
+    <div class="container">
+        <header>
+    <h1 class="glitch" data-text="HS_STUDENT_PMM">HS_STUDENT_PMM</h1>
+    <p class="subtitle">High School Student Pocket Money Manager v2.0</p>
+</header>
+
+        <main class="main-frame">
+            <section id="initial-setup" class="card fade-in">
+                <h3><span class="dot"></span> INISIALISASI SALDO</h3>
+                <div class="input-group">
+                    <input type="number" id="input-awal" placeholder="Masukkan Uang Saku Awal...">
+                    <button onclick="mulaiAplikasi()" class="btn-neon">SET SALDO</button>
+                </div>
+            </section>
+
+            <section id="dashboard" class="hidden">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <small>SALDO SAAT INI</small>
+                        <h2 id="display-saldo">Rp 0</h2>
+                    </div>
+                    <div class="stat-card">
+                        <small>STATUS SISTEM</small>
+                        <h2 id="system-status" class="status-safe">OPERASIONAL</h2>
+                    </div>
+                </div>
+
+                <div class="action-grid">
+                    <div class="card card-action">
+                        <h3>PEMASUKAN</h3>
+                        <input type="number" id="input-pemasukan" placeholder="Jumlah...">
+                        <button onclick="tambahPemasukan()" class="btn-action pulse-blue">TAMBAH</button>
+                    </div>
+                    <div class="card card-action">
+                        <h3>PENGELUARAN</h3>
+                        <input type="number" id="input-pengeluaran" placeholder="Jumlah...">
+                        <button onclick="kurangPengeluaran()" class="btn-action pulse-red">CATAT</button>
+                    </div>
+                </div>
+
+                <div id="warning-box" class="warning-msg hidden">
+                    <i class="alert-icon">!</i> PERINGATAN: SALDO DI BAWAH BATAS MINIMUM!
+                </div>
+                
+                <button onclick="resetSystem()" class="btn-reset">RESET SISTEM</button>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
