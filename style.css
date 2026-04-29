@@ -1,116 +1,155 @@
 :root {
-    --neon-blue: #00f3ff;
-    --neon-purple: #bc13fe;
-    --neon-red: #ff003c;
-    --bg-dark: #050505;
-    --card-bg: rgba(20, 20, 20, 0.8);
+    --primary-pink: #ffc2d1;
+    --soft-purple: #e2ceff;
+    --mint: #caffbf;
+    --text-color: #5b4b8a;
+    --white: #ffffff;
+    --neon-glow: linear-gradient(45deg, #ffc2d1, #e2ceff, #caffbf, #ffd6a5, #ffc2d1);
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--neon-blue);
-    font-family: 'Rajdhani', sans-serif;
+    background-color: #fff0f3;
+    color: var(--text-color);
+    font-family: 'Quicksand', sans-serif;
     margin: 0;
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: crosshair;
 }
 
-/* Scanline Effect */
-.scanline {
-    width: 100%; height: 100px;
-    background: linear-gradient(0deg, rgba(0, 243, 255, 0.1) 0%, transparent 100%);
-    position: absolute; bottom: 100%;
-    animation: scan 4s linear infinite;
-    pointer-events: none; z-index: 10;
+/* --- LIGHTING EFFECTS --- */
+#cursor-light {
+    position: fixed;
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255, 194, 209, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    transition: 0.1s ease-out;
 }
 
-@keyframes scan {
-    0% { bottom: 100%; }
-    100% { bottom: -100px; }
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    z-index: 5;
+.main-card {
     position: relative;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(255, 133, 161, 0.2);
+    z-index: 1;
 }
 
-h1 {
-    font-family: 'Orbitron', sans-serif;
-    text-align: center;
-    font-size: 3rem;
-    letter-spacing: 5px;
-    text-shadow: 0 0 10px var(--neon-blue);
+/* Rainbow Glow Border */
+.main-card::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    z-index: -1;
+    background: var(--neon-glow);
+    background-size: 400%;
+    border-radius: 35px;
+    filter: blur(12px);
+    opacity: 0.7;
+    animation: glowing 10s linear infinite;
 }
 
-.card {
-    background: var(--card-bg);
-    border: 1px solid var(--neon-blue);
-    padding: 25px;
-    border-radius: 5px;
-    box-shadow: inset 0 0 15px rgba(0, 243, 255, 0.2);
-    backdrop-filter: blur(5px);
+@keyframes glowing {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- UI ELEMENTS --- */
+.container { width: 90%; max-width: 450px; text-align: center; }
+
+.title {
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 1.8rem;
+    color: #ff85a1;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 0px white;
+}
+
+.balance-bubble {
+    background: var(--soft-purple);
+    padding: 20px;
+    border-radius: 20px;
     margin-bottom: 20px;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.input-group input, .card-action input {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid var(--neon-purple);
-    color: white;
-    padding: 10px;
-    font-size: 1.2rem;
-    width: 70%;
+.input-wrapper input, .card-cute input {
+    width: 85%;
+    padding: 12px;
+    border-radius: 15px;
+    border: 2px solid var(--soft-purple);
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: inherit;
     outline: none;
 }
 
-.btn-neon {
-    background: transparent;
-    border: 1px solid var(--neon-purple);
-    color: var(--neon-purple);
-    padding: 10px 25px;
-    cursor: pointer;
+.btn-main, .btn-sm {
+    background: #ff85a1;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 15px;
     font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
 }
 
-.btn-neon:hover {
-    background: var(--neon-purple);
-    color: white;
-    box-shadow: 0 0 20px var(--neon-purple);
+.btn-main:hover, .btn-sm:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 133, 161, 0.5);
 }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+.status-pill {
+    display: inline-block;
+    padding: 5px 15px;
+    background: var(--mint);
+    border-radius: 20px;
+    font-size: 0.8rem;
     margin-bottom: 20px;
 }
 
-.stat-card {
-    background: rgba(255, 255, 255, 0.05);
+.action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+
+.card-cute {
+    background: var(--white);
     padding: 15px;
-    text-align: center;
-    border-left: 4px solid var(--neon-blue);
+    border-radius: 20px;
+    border: 2px solid #fcfcfc;
 }
 
-.status-safe { color: #00ff88; text-shadow: 0 0 5px #00ff88; }
-.status-danger { color: var(--neon-red); text-shadow: 0 0 10px var(--neon-red); }
-
-.warning-msg {
-    background: rgba(255, 0, 60, 0.2);
-    border: 1px solid var(--neon-red);
-    color: var(--neon-red);
+.warning-cute {
+    background: #ffdee5;
+    color: #ff5c8a;
     padding: 15px;
-    text-align: center;
-    font-weight: bold;
-    animation: pulse 1s infinite;
+    border-radius: 15px;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    border: 2px dashed #ff85a1;
+    animation: shake 0.5s infinite;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
 }
 
+.blobs .blob {
+    position: absolute; width: 300px; height: 300px;
+    filter: blur(80px); border-radius: 50%; opacity: 0.4; z-index: -2;
+}
+.blob:nth-child(1) { top: -50px; left: -50px; background: var(--soft-purple); }
+.blob:nth-child(2) { bottom: -50px; right: -50px; background: var(--primary-pink); }
 
 .hidden { display: none; }
+.btn-reset { margin-top: 20px; background: none; border: none; color: #b1a7d1; cursor: pointer; text-decoration: underline; }
